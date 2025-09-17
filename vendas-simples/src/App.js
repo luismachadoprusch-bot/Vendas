@@ -1,94 +1,55 @@
-import React, { useState } from 'react';
-import './RegistroVendas.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import CadastroProdutos from './CadastroProdutos';
+import CadastroClientes from './CadastroClientes';
+import CadastroFornecedores from './CadastroFornecedores';
+import ControleEstoque from './ControleEstoque';
+import RegistroVendas from './RegistroVendas';
+import './App.css';
 
-function RegistroVendas({ produtos = [], clientes = [] }) {
-  const [vendas, setVendas] = useState([]);
-  const [produtoSelecionado, setProdutoSelecionado] = useState('');
-  const [clienteSelecionado, setClienteSelecionado] = useState('');
-  const [quantidade, setQuantidade] = useState('');
 
-  // Registrar venda
-  const registrarVenda = () => {
-    if (!produtoSelecionado || !clienteSelecionado || !quantidade) {
-      alert('Preencha todos os campos');
-      return;
-    }
 
-    const produto = produtos.find(p => p.nome === produtoSelecionado);
-    if (!produto) {
-      alert('Produto não encontrado');
-      return;
-    }
-
-    const quantidadeInt = parseInt(quantidade);
-    const valorTotal = produto.preco * quantidadeInt;
-
-    const novaVenda = {
-      produto: produto.nome,
-      cliente: clienteSelecionado,
-      quantidade: quantidadeInt,
-      valorTotal
-    };
-
-    setVendas([...vendas, novaVenda]);
-    setProdutoSelecionado('');
-    setClienteSelecionado('');
-    setQuantidade('');
-  };
-
+function Navbar() {
   return (
-    <div className="container-vendas">
-      <h1>Registro de Vendas</h1>
-
-      <div className="formulario-vendas">
-        <select
-          value={produtoSelecionado}
-          onChange={(e) => setProdutoSelecionado(e.target.value)}
-        >
-          <option value="">Selecione o Produto</option>
-          {produtos.map((p, i) => (
-            <option key={i} value={p.nome}>
-              {p.nome} - R$ {p.preco}
-            </option>
-          ))}
-        </select>
-
-        <select
-          value={clienteSelecionado}
-          onChange={(e) => setClienteSelecionado(e.target.value)}
-        >
-          <option value="">Selecione o Cliente</option>
-          {clientes.map((c, i) => (
-            <option key={i} value={c.nome}>
-              {c.nome}
-            </option>
-          ))}
-        </select>
-
-        <input
-          type="number"
-          placeholder="Quantidade"
-          value={quantidade}
-          onChange={(e) => setQuantidade(e.target.value)}
-        />
-
-        <button onClick={registrarVenda}>Registrar Venda</button>
+    <nav className="navbar">
+      <div className="navbar-logo">Sistema de Vendas</div>
+      <div className="navbar-links">
+        <Link to="/">Dashboard</Link>
+        <Link to="/produtos">Produtos</Link>
+        <Link to="/clientes">Clientes</Link>
+        <Link to="/fornecedores">Fornecedores</Link>
+        <Link to="/estoque">estoque</Link>
+         <Link to="/vendas">vendas</Link>
       </div>
+    </nav>
+  );
+}
 
-      <h2>Vendas Registradas</h2>
-      {vendas.length === 0 ? (
-        <p>Nenhuma venda registrada.</p>
-      ) : (
-        <ul>
-          {vendas.map((venda, index) => (
-            <li key={index}>
-              Produto: {venda.produto} | Cliente: {venda.cliente} | Quantidade: {venda.quantidade} | Total: R$ {venda.valorTotal.toFixed(2)}
-            </li>
-          ))}
-        </ul>
-      )}
+function Dashboard() {
+  return (
+    <div className="dashboard">
+      <h1>Dashboard</h1>
     </div>
   );
 }
 
-export default RegistroVendas;
+function App() {
+  return (
+    <Router>
+      <Navbar />
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/produtos" element={<CadastroProdutos />} />
+          <Route path="/clientes" element={<CadastroClientes />} />
+          <Route path="/fornecedores" element={<CadastroFornecedores />} />
+            <Route path="/estoque" element={<ControleEstoque />} />
+              <Route path="/vendas" element={<RegistroVendas />} />
+        </Routes>
+        
+      </div>
+    </Router>
+  );
+}
+
+export default App;

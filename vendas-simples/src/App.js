@@ -11,6 +11,8 @@ import CarrinhoCompras from './CarrinhoCompras';
 import RelatoriosVendas from './RelatoriosVendas';
 import RelatoriosEstoque from './RelatoriosEstoque';
 import GestaoPagamentos from './GestaoPagamentos';
+import DescontosPromocoes from './DescontosPromocoes';
+import Login from './Login';
 import './App.css';
 
 function Navbar() {
@@ -20,16 +22,15 @@ function Navbar() {
   const [showPagamentos, setShowPagamentos] = useState(false);
   const [showRecibos, setShowRecibos] = useState(false);
   const [showPesquisar, setShowPesquisar] = useState(false);
+  const [showRelatorios, setShowRelatorios] = useState(false);
 
   return (
     <nav className="navbar">
       <div className="navbar-logo">Sistema de Vendas</div>
       <div className="navbar-links">
 
-        {/* Dashboard */}
-        <div className="dropdown">
-          <Link to="/">Dashboard</Link>
-        </div>
+        <Link to="/">Dashboard</Link>
+         <Link to="/login">login</Link>
 
         {/* Cadastros */}
         <div className="dropdown"
@@ -54,6 +55,7 @@ function Navbar() {
             <div className="dropdown-content">
               <Link to="/vendas">Registro de Vendas</Link>
               <Link to="/carrinho">Carrinho</Link>
+              <Link to="/descontos">Descontos & Promoções</Link>
             </div>
           )}
         </div>
@@ -103,6 +105,20 @@ function Navbar() {
           {showPesquisar && (
             <div className="dropdown-content">
               <Link to="/pesquisar">Pesquisa de Produtos</Link>
+             
+            </div>
+          )}
+        </div>
+
+        {/* Relatórios */}
+        <div className="dropdown"
+             onMouseEnter={() => setShowRelatorios(true)}
+             onMouseLeave={() => setShowRelatorios(false)}>
+          <button className="dropbtn">Relatórios ▾</button>
+          {showRelatorios && (
+            <div className="dropdown-content">
+              <Link to="/relatorios">Vendas</Link>
+              <Link to="/RelatoriosEstoque">Estoque</Link>
             </div>
           )}
         </div>
@@ -138,6 +154,8 @@ function App() {
           <Route path="/RelatoriosEstoque" element={<RelatoriosEstoque />} />
           <Route path="/GestaoPagamentos" element={<GestaoPagamentos />} />
           <Route path="/relatorios" element={<RelatoriosVendas />} />
+          <Route path="/descontos" element={<DescontosPromocoes />} />
+          <Route path="/Login" element={<Login />} />
         </Routes>
       </div>
     </Router>

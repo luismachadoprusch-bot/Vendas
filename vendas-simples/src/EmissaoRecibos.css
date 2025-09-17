@@ -1,0 +1,65 @@
+.container-recibos {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 25px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+  text-align: center;
+  color: #333;
+}
+
+.lista-vendas {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.lista-vendas li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8f9fa;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.lista-vendas button {
+  padding: 5px 12px;
+  background-color: #28a745;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.3s;
+}
+
+.lista-vendas button:hover {
+  background-color: #218838;
+}
+
+.recibo {
+  margin-top: 30px;
+  padding: 20px;
+  border: 2px dashed #444;
+  background-color: #fafafa;
+  border-radius: 6px;
+}
+
+.recibo p {
+  margin: 8px 0;
+  font-size: 15px;
+  color: #444;
+}
+
+.assinatura {
+  margin-top: 30px;
+  text-align: center;
+  color: #555;
+}

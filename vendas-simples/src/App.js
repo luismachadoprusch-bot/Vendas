@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import CadastroProdutos from './CadastroProdutos';
 import CadastroClientes from './CadastroClientes';
@@ -10,24 +10,103 @@ import PesquisaProdutos from './PesquisaProdutos';
 import CarrinhoCompras from './CarrinhoCompras';
 import RelatoriosVendas from './RelatoriosVendas';
 import RelatoriosEstoque from './RelatoriosEstoque';
+import GestaoPagamentos from './GestaoPagamentos';
 import './App.css';
 
 function Navbar() {
+  const [showCadastros, setShowCadastros] = useState(false);
+  const [showVendas, setShowVendas] = useState(false);
+  const [showEstoque, setShowEstoque] = useState(false);
+  const [showPagamentos, setShowPagamentos] = useState(false);
+  const [showRecibos, setShowRecibos] = useState(false);
+  const [showPesquisar, setShowPesquisar] = useState(false);
+
   return (
     <nav className="navbar">
       <div className="navbar-logo">Sistema de Vendas</div>
       <div className="navbar-links">
-        <Link to="/">Dashboard</Link>
-        <Link to="/produtos">Produtos</Link>
-        <Link to="/clientes">Clientes</Link>
-        <Link to="/fornecedores">Fornecedores</Link>
-        <Link to="/estoque">Estoque</Link>
-        <Link to="/vendas">Vendas</Link>
-        <Link to="/recibos">Recibos</Link>
-        <Link to="/pesquisar">Pesquisar</Link>
-        <Link to="/carrinho">Carrinho</Link>
-        <Link to="/relatorios">Relatórios</Link>
-         <Link to="/RelatoriosEstoque">RelatoriosEstoque</Link>
+
+        {/* Dashboard */}
+        <div className="dropdown">
+          <Link to="/">Dashboard</Link>
+        </div>
+
+        {/* Cadastros */}
+        <div className="dropdown"
+             onMouseEnter={() => setShowCadastros(true)}
+             onMouseLeave={() => setShowCadastros(false)}>
+          <button className="dropbtn">Cadastros ▾</button>
+          {showCadastros && (
+            <div className="dropdown-content">
+              <Link to="/produtos">Produtos</Link>
+              <Link to="/clientes">Clientes</Link>
+              <Link to="/fornecedores">Fornecedores</Link>
+            </div>
+          )}
+        </div>
+
+        {/* Vendas */}
+        <div className="dropdown"
+             onMouseEnter={() => setShowVendas(true)}
+             onMouseLeave={() => setShowVendas(false)}>
+          <button className="dropbtn">Vendas ▾</button>
+          {showVendas && (
+            <div className="dropdown-content">
+              <Link to="/vendas">Registro de Vendas</Link>
+              <Link to="/carrinho">Carrinho</Link>
+            </div>
+          )}
+        </div>
+
+        {/* Estoque */}
+        <div className="dropdown"
+             onMouseEnter={() => setShowEstoque(true)}
+             onMouseLeave={() => setShowEstoque(false)}>
+          <button className="dropbtn">Estoque ▾</button>
+          {showEstoque && (
+            <div className="dropdown-content">
+              <Link to="/estoque">Controle Estoque</Link>
+              <Link to="/RelatoriosEstoque">Relatórios Estoque</Link>
+            </div>
+          )}
+        </div>
+
+        {/* Pagamentos */}
+        <div className="dropdown"
+             onMouseEnter={() => setShowPagamentos(true)}
+             onMouseLeave={() => setShowPagamentos(false)}>
+          <button className="dropbtn">Pagamentos ▾</button>
+          {showPagamentos && (
+            <div className="dropdown-content">
+              <Link to="/GestaoPagamentos">Gestão de Pagamentos</Link>
+            </div>
+          )}
+        </div>
+
+        {/* Recibos */}
+        <div className="dropdown"
+             onMouseEnter={() => setShowRecibos(true)}
+             onMouseLeave={() => setShowRecibos(false)}>
+          <button className="dropbtn">Recibos ▾</button>
+          {showRecibos && (
+            <div className="dropdown-content">
+              <Link to="/recibos">Emissão de Recibos</Link>
+            </div>
+          )}
+        </div>
+
+        {/* Pesquisar */}
+        <div className="dropdown"
+             onMouseEnter={() => setShowPesquisar(true)}
+             onMouseLeave={() => setShowPesquisar(false)}>
+          <button className="dropbtn">Pesquisar ▾</button>
+          {showPesquisar && (
+            <div className="dropdown-content">
+              <Link to="/pesquisar">Pesquisa de Produtos</Link>
+            </div>
+          )}
+        </div>
+
       </div>
     </nav>
   );
@@ -56,8 +135,9 @@ function App() {
           <Route path="/recibos" element={<EmissaoRecibos />} />
           <Route path="/pesquisar" element={<PesquisaProdutos />} />
           <Route path="/carrinho" element={<CarrinhoCompras />} />
-          <Route path="/relatorios" element={<RelatoriosVendas />} />
           <Route path="/RelatoriosEstoque" element={<RelatoriosEstoque />} />
+          <Route path="/GestaoPagamentos" element={<GestaoPagamentos />} />
+          <Route path="/relatorios" element={<RelatoriosVendas />} />
         </Routes>
       </div>
     </Router>

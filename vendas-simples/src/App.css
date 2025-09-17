@@ -6,6 +6,7 @@
   background-color: #007bff;
   color: white;
   padding: 15px 30px;
+  font-family: Arial, sans-serif;
 }
 
 .navbar-logo {
@@ -13,25 +14,73 @@
   font-size: 20px;
 }
 
-.navbar-links a {
-  color: white;
-  margin-left: 20px;
-  text-decoration: none;
-  font-weight: 500;
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-.navbar-links a:hover {
-  text-decoration: underline;
+/* Links normais */
+.navbar-links a, .dropbtn {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 5px 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.navbar-links a:hover, .dropbtn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* Dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown menu */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 35px;
+  left: 0;
+  background-color: white;
+  min-width: 160px;
+  border-radius: 4px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links dentro do dropdown */
+.dropdown-content a {
+  color: #333;
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Mostrar dropdown ao passar o mouse */
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 /* Container principal */
 .container {
   padding: 30px;
-  font-family: Arial, sans-serif;
 }
 
 /* Dashboard simplificado */
 .dashboard {
   text-align: center;
   margin-top: 50px;
+  font-family: Arial, sans-serif;
 }

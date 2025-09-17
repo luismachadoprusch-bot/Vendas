@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import CadastroProdutos from './CadastroProdutos';
 import CadastroClientes from './CadastroClientes';
 import CadastroFornecedores from './CadastroFornecedores';
+import ControleEstoque from './ControleEstoque';
 import './App.css';
 
 function Navbar() {
@@ -14,6 +15,7 @@ function Navbar() {
         <Link to="/produtos">Produtos</Link>
         <Link to="/clientes">Clientes</Link>
         <Link to="/fornecedores">Fornecedores</Link>
+        <Link to="/estoque">estoque</Link>
       </div>
     </nav>
   );
@@ -37,6 +39,7 @@ function App() {
           <Route path="/produtos" element={<CadastroProdutos />} />
           <Route path="/clientes" element={<CadastroClientes />} />
           <Route path="/fornecedores" element={<CadastroFornecedores />} />
+            <Route path="/estoque" element={<ControleEstoque />} />
         </Routes>
       </div>
     </Router>

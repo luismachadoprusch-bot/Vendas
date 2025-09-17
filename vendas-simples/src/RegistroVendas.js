@@ -7,7 +7,6 @@ function RegistroVendas({ produtos = [], clientes = [] }) {
   const [clienteSelecionado, setClienteSelecionado] = useState('');
   const [quantidade, setQuantidade] = useState('');
 
-  // Registrar venda
   const registrarVenda = () => {
     if (!produtoSelecionado || !clienteSelecionado || !quantidade) {
       alert('Preencha todos os campos');
@@ -20,13 +19,12 @@ function RegistroVendas({ produtos = [], clientes = [] }) {
       return;
     }
 
-    const quantidadeInt = parseInt(quantidade);
-    const valorTotal = produto.preco * quantidadeInt;
+    const valorTotal = parseFloat(produto.preco) * parseInt(quantidade);
 
     const novaVenda = {
       produto: produto.nome,
       cliente: clienteSelecionado,
-      quantidade: quantidadeInt,
+      quantidade: parseInt(quantidade),
       valorTotal
     };
 
@@ -47,9 +45,7 @@ function RegistroVendas({ produtos = [], clientes = [] }) {
         >
           <option value="">Selecione o Produto</option>
           {produtos.map((p, i) => (
-            <option key={i} value={p.nome}>
-              {p.nome} - R$ {p.preco}
-            </option>
+            <option key={i} value={p.nome}>{p.nome} - R$ {p.preco}</option>
           ))}
         </select>
 
@@ -59,9 +55,7 @@ function RegistroVendas({ produtos = [], clientes = [] }) {
         >
           <option value="">Selecione o Cliente</option>
           {clientes.map((c, i) => (
-            <option key={i} value={c.nome}>
-              {c.nome}
-            </option>
+            <option key={i} value={c.nome}>{c.nome}</option>
           ))}
         </select>
 

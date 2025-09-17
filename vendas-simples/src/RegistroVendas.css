@@ -1,0 +1,64 @@
+.container-vendas {
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+  text-align: center;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+.formulario-vendas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 30px;
+}
+
+.formulario-vendas select,
+.formulario-vendas input {
+  flex: 1 1 45%;
+  padding: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.formulario-vendas button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 5px;
+  transition: background-color 0.3s;
+}
+
+.formulario-vendas button:hover {
+  background-color: #0056b3;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+p {
+  text-align: center;
+  color: #777777;
+}

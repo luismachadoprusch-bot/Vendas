@@ -1,0 +1,97 @@
+/* CadastroClientes.css */
+
+/* Container principal */
+.container {
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Títulos */
+h1, h2 {
+  color: #333333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Formulário */
+.formulario {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.formulario input {
+  flex: 1 1 45%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Botão do formulário */
+.formulario button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.formulario button:hover {
+  background-color: #0056b3;
+}
+
+/* Lista de clientes */
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+li button {
+  margin-left: 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 4px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+li button:hover {
+  background-color: #218838;
+}
+
+li button:last-child {
+  background-color: #dc3545;
+}
+
+li button:last-child:hover {
+  background-color: #c82333;
+}
+
+/* Mensagem quando não há clientes */
+p {
+  text-align: center;
+  color: #777777;
+}

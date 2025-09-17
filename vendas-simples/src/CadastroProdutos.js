@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './CadastroProdutos.css';
 
 function CadastroProdutos() {
   const [produtos, setProdutos] = useState([]);
@@ -39,22 +40,21 @@ function CadastroProdutos() {
   };
 
   return (
-    <div>
+    <div className="container-produtos">
       <h1>Cadastro de Produtos</h1>
-      <div style={{ marginBottom: '20px' }}>
+
+      <div className="formulario-produtos">
         <input
           type="text"
           placeholder="Nome do produto"
           value={nome}
           onChange={(e) => setNome(e.target.value)}
-          style={{ marginRight: '10px' }}
         />
         <input
           type="number"
           placeholder="Preço"
           value={preco}
           onChange={(e) => setPreco(e.target.value)}
-          style={{ marginRight: '10px' }}
         />
         <button onClick={salvarProduto}>
           {editarIndex !== null ? 'Atualizar' : 'Adicionar'}
@@ -67,9 +67,9 @@ function CadastroProdutos() {
       ) : (
         <ul>
           {produtos.map((produto, index) => (
-            <li key={index} style={{ marginBottom: '10px' }}>
+            <li key={index}>
               {produto.nome} - R$ {produto.preco}{' '}
-              <button onClick={() => editarProduto(index)}>Editar</button>{' '}
+              <button onClick={() => editarProduto(index)}>Editar</button>
               <button onClick={() => removerProduto(index)}>Remover</button>
             </li>
           ))}

@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import CadastroProdutos from './CadastroProdutos';
 import CadastroClientes from './CadastroClientes';
+import CadastroFornecedores from './CadastroFornecedores';
 import './App.css';
-import './CadastroClientes.css'; 
 
 function Navbar() {
   return (
@@ -13,6 +13,7 @@ function Navbar() {
         <Link to="/">Dashboard</Link>
         <Link to="/produtos">Produtos</Link>
         <Link to="/clientes">Clientes</Link>
+        <Link to="/fornecedores">Fornecedores</Link>
       </div>
     </nav>
   );
@@ -21,6 +22,7 @@ function Navbar() {
 function Dashboard() {
   return (
     <div className="dashboard">
+      <h1>Dashboard</h1>
     </div>
   );
 }
@@ -34,6 +36,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/produtos" element={<CadastroProdutos />} />
           <Route path="/clientes" element={<CadastroClientes />} />
+          <Route path="/fornecedores" element={<CadastroFornecedores />} />
         </Routes>
       </div>
     </Router>

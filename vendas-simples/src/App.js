@@ -6,6 +6,7 @@ import CadastroFornecedores from './CadastroFornecedores';
 import ControleEstoque from './ControleEstoque';
 import RegistroVendas from './RegistroVendas';
 import EmissaoRecibos from './EmissaoRecibos';
+import PesquisaProdutos from './PesquisaProdutos';
 import './App.css';
 
 function Navbar() {
@@ -20,6 +21,7 @@ function Navbar() {
         <Link to="/estoque">Estoque</Link>
         <Link to="/vendas">Vendas</Link>
         <Link to="/recibos">Recibos</Link>
+        <Link to="/pesquisar">Pesquisar</Link>
       </div>
     </nav>
   );
@@ -46,6 +48,7 @@ function App() {
           <Route path="/estoque" element={<ControleEstoque />} />
           <Route path="/vendas" element={<RegistroVendas />} />
           <Route path="/recibos" element={<EmissaoRecibos />} />
+          <Route path="/pesquisar" element={<PesquisaProdutos />} />
         </Routes>
       </div>
     </Router>

@@ -1,0 +1,45 @@
+.container-pesquisa {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 25px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.input-pesquisa {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+.tabela-pesquisa {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabela-pesquisa th,
+.tabela-pesquisa td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.tabela-pesquisa th {
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.tabela-pesquisa tr:nth-child(even) {
+  background-color: #f9f9f9;
+}

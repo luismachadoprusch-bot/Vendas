@@ -1,3 +1,4 @@
+// App.js
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import CadastroProdutos from './CadastroProdutos';
@@ -12,7 +13,7 @@ import RelatoriosVendas from './RelatoriosVendas';
 import RelatoriosEstoque from './RelatoriosEstoque';
 import GestaoPagamentos from './GestaoPagamentos';
 import DescontosPromocoes from './DescontosPromocoes';
-import Notificacoes from './Notificacoes';
+import Dashboard from './Dashboard';   // ✅ agora importa o Dashboard separado
 import Login from './Login';
 import './App.css';
 
@@ -30,7 +31,7 @@ function Navbar({ usuario, onLogin, onLogout }) {
       <div className="navbar-logo">Sistema de Vendas</div>
       <div className="navbar-links">
 
-        <Link to="/">Dashboard</Link>
+        <Link to="/dashboard">Dashboard</Link>
 
         {!usuario ? (
           <Link to="/login">Login</Link>
@@ -136,15 +137,6 @@ function Navbar({ usuario, onLogin, onLogout }) {
   );
 }
 
-function Dashboard() {
-  return (
-    <div className="dashboard">
-      <h1>Dashboard</h1>
-      <Notificacoes />
-    </div>
-  );
-}
-
 function App() {
   const [usuarioLogado, setUsuarioLogado] = useState(null);
 
@@ -156,7 +148,7 @@ function App() {
       <Navbar usuario={usuarioLogado} onLogin={handleLogin} onLogout={handleLogout} />
       <div className="container">
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/produtos" element={<CadastroProdutos />} />
           <Route path="/clientes" element={<CadastroClientes />} />
           <Route path="/fornecedores" element={<CadastroFornecedores />} />

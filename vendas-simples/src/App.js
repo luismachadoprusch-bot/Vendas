@@ -12,10 +12,11 @@ import RelatoriosVendas from './RelatoriosVendas';
 import RelatoriosEstoque from './RelatoriosEstoque';
 import GestaoPagamentos from './GestaoPagamentos';
 import DescontosPromocoes from './DescontosPromocoes';
+import Notificacoes from './Notificacoes';
 import Login from './Login';
 import './App.css';
 
-function Navbar() {
+function Navbar({ usuario, onLogin, onLogout }) {
   const [showCadastros, setShowCadastros] = useState(false);
   const [showVendas, setShowVendas] = useState(false);
   const [showEstoque, setShowEstoque] = useState(false);
@@ -30,7 +31,15 @@ function Navbar() {
       <div className="navbar-links">
 
         <Link to="/">Dashboard</Link>
-         <Link to="/login">login</Link>
+
+        {!usuario ? (
+          <Link to="/login">Login</Link>
+        ) : (
+          <>
+            <span>Olá, {usuario.nome}</span>
+            <button onClick={onLogout}>Logout</button>
+          </>
+        )}
 
         {/* Cadastros */}
         <div className="dropdown"
@@ -105,7 +114,6 @@ function Navbar() {
           {showPesquisar && (
             <div className="dropdown-content">
               <Link to="/pesquisar">Pesquisa de Produtos</Link>
-             
             </div>
           )}
         </div>
@@ -132,14 +140,20 @@ function Dashboard() {
   return (
     <div className="dashboard">
       <h1>Dashboard</h1>
+      <Notificacoes />
     </div>
   );
 }
 
 function App() {
+  const [usuarioLogado, setUsuarioLogado] = useState(null);
+
+  const handleLogin = (user) => setUsuarioLogado(user);
+  const handleLogout = () => setUsuarioLogado(null);
+
   return (
     <Router>
-      <Navbar />
+      <Navbar usuario={usuarioLogado} onLogin={handleLogin} onLogout={handleLogout} />
       <div className="container">
         <Routes>
           <Route path="/" element={<Dashboard />} />
@@ -155,7 +169,7 @@ function App() {
           <Route path="/GestaoPagamentos" element={<GestaoPagamentos />} />
           <Route path="/relatorios" element={<RelatoriosVendas />} />
           <Route path="/descontos" element={<DescontosPromocoes />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/login" element={<Login onLogin={handleLogin} />} />
         </Routes>
       </div>
     </Router>

@@ -1,6 +1,6 @@
 // App.js
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
 import CadastroProdutos from './CadastroProdutos';
 import CadastroClientes from './CadastroClientes';
 import CadastroFornecedores from './CadastroFornecedores';
@@ -13,24 +13,62 @@ import RelatoriosVendas from './RelatoriosVendas';
 import RelatoriosEstoque from './RelatoriosEstoque';
 import GestaoPagamentos from './GestaoPagamentos';
 import DescontosPromocoes from './DescontosPromocoes';
-import Dashboard from './Dashboard';   // ✅ agora importa o Dashboard separado
+import Dashboard from './Dashboard';
 import Login from './Login';
 import './App.css';
 
-function Navbar({ usuario, onLogin, onLogout }) {
-  const [showCadastros, setShowCadastros] = useState(false);
-  const [showVendas, setShowVendas] = useState(false);
-  const [showEstoque, setShowEstoque] = useState(false);
-  const [showPagamentos, setShowPagamentos] = useState(false);
-  const [showRecibos, setShowRecibos] = useState(false);
-  const [showPesquisar, setShowPesquisar] = useState(false);
-  const [showRelatorios, setShowRelatorios] = useState(false);
+function Navbar({ usuario, onLogout }) {
+  const [menuAberto, setMenuAberto] = useState(null);
+
+  const toggleMenu = (menu) => setMenuAberto(menu);
+  const closeMenu = () => setMenuAberto(null);
+
+  // Definição centralizada dos menus
+  const menus = [
+    {
+      titulo: "Cadastros",
+      links: [
+        { to: "/produtos", label: "Produtos" },
+        { to: "/clientes", label: "Clientes" },
+        { to: "/fornecedores", label: "Fornecedores" },
+      ],
+    },
+    {
+      titulo: "Vendas",
+      links: [
+        { to: "/vendas", label: "Registro de Vendas" },
+        { to: "/carrinho", label: "Carrinho" },
+        { to: "/descontos", label: "Descontos & Promoções" },
+      ],
+    },
+    {
+      titulo: "Estoque",
+      links: [
+        { to: "/estoque", label: "Controle Estoque" },
+        { to: "/RelatoriosEstoque", label: "Relatórios Estoque" },
+      ],
+    },
+    {
+      titulo: "Recibos",
+      links: [{ to: "/recibos", label: "Emissão de Recibos" }],
+    },
+    {
+      titulo: "Pesquisar",
+      links: [{ to: "/pesquisar", label: "Pesquisa de Produtos" }],
+    },
+    {
+      titulo: "Relatórios",
+      links: [
+        { to: "/relatorios", label: "Vendas" },
+        { to: "/RelatoriosEstoque", label: "Estoque" },
+      ],
+    },
+  ];
 
   return (
     <nav className="navbar">
       <div className="navbar-logo">Sistema de Vendas</div>
       <div className="navbar-links">
-
         <Link to="/dashboard">Dashboard</Link>
 
         {!usuario ? (
@@ -42,96 +80,29 @@ function Navbar({ usuario, onLogin, onLogout }) {
           </>
         )}
 
-        {/* Cadastros */}
-        <div className="dropdown"
-             onMouseEnter={() => setShowCadastros(true)}
-             onMouseLeave={() => setShowCadastros(false)}>
-          <button className="dropbtn">Cadastros ▾</button>
-          {showCadastros && (
-            <div className="dropdown-content">
-              <Link to="/produtos">Produtos</Link>
-              <Link to="/clientes">Clientes</Link>
-              <Link to="/fornecedores">Fornecedores</Link>
-            </div>
-          )}
-        </div>
+        {/* Menus dinâmicos */}
+        {menus.map((menu) => (
+          <div
+            key={menu.titulo}
+            className="dropdown"
+            onMouseEnter={() => toggleMenu(menu.titulo)}
+            onMouseLeave={closeMenu}
+          >
+            <button className="dropbtn">{menu.titulo} ▾</button>
+            {menuAberto === menu.titulo && (
+              <div className="dropdown-content">
+                {menu.links.map((link) => (
+                  <Link key={link.to} to={link.to}>
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
 
-        {/* Vendas */}
-        <div className="dropdown"
-             onMouseEnter={() => setShowVendas(true)}
-             onMouseLeave={() => setShowVendas(false)}>
-          <button className="dropbtn">Vendas ▾</button>
-          {showVendas && (
-            <div className="dropdown-content">
-              <Link to="/vendas">Registro de Vendas</Link>
-              <Link to="/carrinho">Carrinho</Link>
-              <Link to="/descontos">Descontos & Promoções</Link>
-            </div>
-          )}
-        </div>
-
-        {/* Estoque */}
-        <div className="dropdown"
-             onMouseEnter={() => setShowEstoque(true)}
-             onMouseLeave={() => setShowEstoque(false)}>
-          <button className="dropbtn">Estoque ▾</button>
-          {showEstoque && (
-            <div className="dropdown-content">
-              <Link to="/estoque">Controle Estoque</Link>
-              <Link to="/RelatoriosEstoque">Relatórios Estoque</Link>
-            </div>
-          )}
-        </div>
-
-        {/* Pagamentos */}
-        <div className="dropdown"
-             onMouseEnter={() => setShowPagamentos(true)}
-             onMouseLeave={() => setShowPagamentos(false)}>
-          <button className="dropbtn">Pagamentos ▾</button>
-          {showPagamentos && (
-            <div className="dropdown-content">
-              <Link to="/GestaoPagamentos">Gestão de Pagamentos</Link>
-            </div>
-          )}
-        </div>
-
-        {/* Recibos */}
-        <div className="dropdown"
-             onMouseEnter={() => setShowRecibos(true)}
-             onMouseLeave={() => setShowRecibos(false)}>
-          <button className="dropbtn">Recibos ▾</button>
-          {showRecibos && (
-            <div className="dropdown-content">
-              <Link to="/recibos">Emissão de Recibos</Link>
-            </div>
-          )}
-        </div>
-
-        {/* Pesquisar */}
-        <div className="dropdown"
-             onMouseEnter={() => setShowPesquisar(true)}
-             onMouseLeave={() => setShowPesquisar(false)}>
-          <button className="dropbtn">Pesquisar ▾</button>
-          {showPesquisar && (
-            <div className="dropdown-content">
-              <Link to="/pesquisar">Pesquisa de Produtos</Link>
-            </div>
-          )}
-        </div>
-
-        {/* Relatórios */}
-        <div className="dropdown"
-             onMouseEnter={() => setShowRelatorios(true)}
-             onMouseLeave={() => setShowRelatorios(false)}>
-          <button className="dropbtn">Relatórios ▾</button>
-          {showRelatorios && (
-            <div className="dropdown-content">
-              <Link to="/relatorios">Vendas</Link>
-              <Link to="/RelatoriosEstoque">Estoque</Link>
-            </div>
-          )}
-        </div>
-
+        {/* Pagamentos direto (sem dropdown, mais intuitivo) */}
+        <Link to="/GestaoPagamentos" className="pagamentos-link">💳 Pagamentos</Link>
       </div>
     </nav>
   );
@@ -145,9 +116,10 @@ function App() {
 
   return (
     <Router>
-      <Navbar usuario={usuarioLogado} onLogin={handleLogin} onLogout={handleLogout} />
+      <Navbar usuario={usuarioLogado} onLogout={handleLogout} />
       <div className="container">
         <Routes>
+          <Route path="/" element={<Navigate to="/dashboard" />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/produtos" element={<CadastroProdutos />} />
           <Route path="/clientes" element={<CadastroClientes />} />

@@ -2,6 +2,21 @@
 import React, { useState } from 'react';
 import './Login.css';
 
+function hash(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) {
+    h = Math.imul(31, h) + str.charCodeAt(i) | 0;
+  }
+
+  return h.toString();
+}
+
+
+const sanitizeInput = (input) => {
+    return input.trim().replace(/[<>"'`;]/g, '');
+  };
+
+
 function Login({ onLogin }) {
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');

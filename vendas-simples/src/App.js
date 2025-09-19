@@ -16,6 +16,11 @@ import DescontosPromocoes from './DescontosPromocoes';
 import Dashboard from './Dashboard';
 import Login from './Login';
 import './App.css';
+import FeatureComponentA from './components/FeatureComponentA';
+import FeatureComponentB from './components/FeatureComponentB';
+import { isFeatureEnabled } from './services/featureFlags';
+
+
 
 function Navbar({ usuario, onLogout }) {
   const [menuAberto, setMenuAberto] = useState(null);
@@ -70,6 +75,15 @@ function Navbar({ usuario, onLogout }) {
       <div className="navbar-logo">Sistema de Vendas</div>
       <div className="navbar-links">
         <Link to="/dashboard">Dashboard</Link>
+
+
+      <div>
+        <h1>POC feacture ativada</h1>
+        {isFeatureEnabled('featureA') && <FeatureComponentA />}
+      {isFeatureEnabled('featureB') && <FeatureComponentB />}
+      </div>
+
+
 
         {!usuario ? (
           <Link to="/login">Login</Link>
